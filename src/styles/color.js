@@ -1,0 +1,20 @@
+export const WHITE = '#FFFFFF'
+
+export const BLUE_LIGHT_100 = '#D3EAFD'
+export const BLUE_LIGHT = '#ADB5BD'
+export const BLUE_300 = '#72BCF7'
+export const BLUE = '#0C90FF'
+export const BLUE_DEEP = '#021D33'
+export const BLUE_BORDER_COLOR = '#9CCBF0'
+export const GREEN = '#00BF00'
+
+export const GREY_BLUE_LIGHT = '#768591'
+export const GREY_BLUE = '#82909B'
+export const GREY_BLUE_DEEP = '#032039'
+
+export const GREY_LIGHT = '#FAFAFA'
+export const GREY_100 = '#F7F7F7'
+export const GREY_50 = '#F7F7FA'
+export const GREY_200 = '#E6E6E6'
+export const GREY_300 = '#EEEEEE'
+export const GREY = '#AAAAAA'
