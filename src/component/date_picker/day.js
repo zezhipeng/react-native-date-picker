@@ -52,7 +52,6 @@ class Day extends PureComponent {
       setRange,
       type
     } = this.props
-
     const animatedObj = animatedStyle(type, this.state.active)
 
     return (
@@ -93,7 +92,7 @@ const setProps = withProps(({
   dispatch,
   weekdays
 }) => ({
-  offsetStyle: index === 0 ? { marginLeft: DAY_CONAINER_WIDTH * (weekdays - 1) } : {},
+  offsetStyle: index === 0 ? { marginLeft: DAY_CONAINER_WIDTH * weekdays } : {},
   setRange: () => dispatch({ type: 'SET_RANGE', data: full })
 }))
 

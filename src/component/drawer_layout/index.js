@@ -47,6 +47,11 @@ class Drawer extends PureComponent {
     this.setState({ visible: !visible })
   }
 
+  submit = (data) => {
+    this.toggleVisible()
+    this.props.submit(data)
+  }
+
   render() {
     return (
       <View style={style.content}>
@@ -54,7 +59,12 @@ class Drawer extends PureComponent {
           style={style.container}
           visible={this.state.visible}
         >
-          <DatePicker visible={this.state.visibleState} toggleVisible={this.toggleVisible} />
+          <DatePicker
+            value={this.props.value}
+            visible={this.state.visibleState}
+            toggleVisible={this.toggleVisible}
+            submit={this.submit}
+          />
         </AnimatedModal>
         {this.props.children}
       </View>

@@ -1,6 +1,8 @@
-import { StyleSheet } from 'react-native'
+import { StyleSheet, Platform } from 'react-native'
 import { SCREEN_WIDTH, REGULAR, MEDIUM } from '../../styles/variables'
 import { GREY_50, BLUE_DEEP, BLUE_LIGHT, WHITE, GREY_BLUE_LIGHT, BLUE, BLUE_LIGHT_100, BLUE_300 } from '../../styles/color'
+
+const scale = (Platform.OS === 'ios') ? 1.2 : 1
 
 const MONTH_PADDING = 18
 
@@ -81,7 +83,7 @@ export const rangeStyle = StyleSheet.create({
     position: 'absolute',
     left: SCREEN_WIDTH / 2,
     bottom: 40,
-    width: 1,
+    width: 2,
     height: 81,
     backgroundColor: BLUE_LIGHT,
     transform: [{ rotate: '43deg' }]
@@ -95,7 +97,9 @@ export const dayStyle = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginBottom: 11,
-    backgroundColor: GREY_50
+    backgroundColor: GREY_50,
+    position: 'relative',
+    zIndex: 1
   },
   tomorrowText: {
     fontSize: 17,
@@ -137,7 +141,7 @@ export const monthStyle = StyleSheet.create({
 
 const activeStyle = active => ({
   ctx: {
-    zIndex: 2,
+    zIndex: 3,
     backgroundColor: active.interpolate({
       inputRange: [0, 1],
       outputRange: [GREY_50, BLUE],
@@ -151,7 +155,7 @@ const activeStyle = active => ({
     transform: [{
       scale: active.interpolate({
         inputRange: [0, 0.5, 1],
-        outputRange: [1, 1.2, 1],
+        outputRange: [1, scale, 1],
         extrapolate: 'clamp'
       })
     }]
@@ -231,7 +235,7 @@ export const headerTools = StyleSheet.create({
   },
   line: {
     width: 2,
-    height: 22,
+    height: 20,
     position: 'absolute',
     top: 0,
     left: 7,

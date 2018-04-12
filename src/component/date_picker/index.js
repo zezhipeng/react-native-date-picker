@@ -12,7 +12,10 @@ import { SCREEN_HEIGHT } from '../../styles/variables'
 class DatePicker extends PureComponent {
   constructor(props) {
     super(props)
-    this.store = createStore(combineReducers({ rangeReducer, refsReducer }))
+    const value = props.value
+      .map(item => item.replace(/'/g, '').split(' ')[0])
+
+    this.store = createStore(combineReducers({ rangeReducer: rangeReducer(value), refsReducer }))
   }
 
   render() {
@@ -26,10 +29,16 @@ class DatePicker extends PureComponent {
 
     return (
       <Provider store={this.store}>
-        <Animated.View style={{ flex: 1, transform }}>
+        <Animated.View style={{
+          flex: 1,
+          transform,
+          backgroundColor: '#fff',
+          zIndex: 999
+        }}
+        >
           <Header toggleVisible={this.props.toggleVisible} />
           <Sections />
-          <Submit />
+          <Submit submit={this.props.submit} />
         </Animated.View>
       </Provider>
     )

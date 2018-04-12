@@ -9,6 +9,7 @@ const hasTwoValue = R.compose(
 
 const isAfter = (a, b) => moment(b[0]).isAfter(a[0])
 const isBefore = (a, b) => moment(b[0]).isBefore(a[0])
+const isSame = (a, b) => moment(b[0]).isSame(a[0])
 
 const isEmpty = R.compose(
   R.isEmpty,
@@ -19,13 +20,12 @@ const setRange = R.cond([
   [isEmpty, R.concat],
   [hasTwoValue, R.nthArg(1)],
   [isAfter, R.concat],
+  [isSame, R.concat],
   [isBefore, R.flip(R.concat)],
   [R.T, R.nthArg(1)]
 ])
 
-const initState = []
-
-export default (state = initState, action) => {
+export default initState => (state = initState, action) => {
   switch (action.type) {
   case 'SET_RANGE':
     return setRange(state, [action.data])

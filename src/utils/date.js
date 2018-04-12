@@ -1,13 +1,14 @@
 import Moment from 'moment'
 import R from 'ramda'
-import ChineseLunar from 'chinese-lunar'
+const ChineseLunar = require('chinese-lunar')
 
-const MomentRange = require('moment-range')
+import 'moment/locale/zh-cn' 
+
+const MomentRange =  require('moment-range')
 
 const moment = MomentRange.extendMoment(Moment)
 
-
-const getRange = R.curryN(2, moment.range)
+const getRange = (start, end) => moment.range(start, end)
 
 const stepByDay = item => item.by('day', { step: 1 })
 
@@ -42,18 +43,10 @@ const formatRange = R.compose(
 
 const getDate = FORMAT => moment().format(FORMAT)
 
-const getLastYear = R.compose(
-  R.dec,
-  getDate
-)
-
-const getNextMonth = R.compose(
-  R.inc,
-  getDate
-)
+const getLastYear = FORMAT => moment().subtract(1, 'years').format(FORMAT)
+const getNextMonth = FORMAT => moment().add(1, 'months').format(FORMAT)
 
 const indexByDate = R.indexBy(R.pipe(R.nth(0), R.prop('date')))
-
 const zipWithKeyAndData = R.map(R.zipObj(['key', 'data']))
 
 export const getStart = (year, month) => `${getLastYear(year)}-${getDate(month)}`
