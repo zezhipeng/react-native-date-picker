@@ -6,7 +6,7 @@ const scale = (Platform.OS === 'ios') ? 1.2 : 1
 
 const MONTH_PADDING = 18
 
-export const DAY_CONAINER_WIDTH = (SCREEN_WIDTH - (MONTH_PADDING * 2)) / 7
+export const DAY_CONAINER_WIDTH = Math.floor((SCREEN_WIDTH - (MONTH_PADDING * 2)) / 7)
 
 const style = StyleSheet.create({
   sections: {
@@ -230,6 +230,10 @@ export const headerTools = StyleSheet.create({
     justifyContent: 'space-between'
   },
   lineCtx: {
+    width: 16,
+    height: 16
+  },
+  linePng: {
     width: 16,
     height: 16
   },

@@ -1,23 +1,17 @@
 import React from 'react'
-import { View, Text, TouchableOpacity } from 'react-native'
+import { View, Text, TouchableOpacity, Image } from 'react-native'
 import { connect } from 'react-redux'
 import { headerTools } from '../style'
-
-const rotate45 = {
-  transform: [{ rotate: '45deg' }]
-}
-
-const rotate135 = {
-  transform: [{ rotate: '-45deg' }]
-}
+import xPng from '../../../assets/x.png'
 
 const HeaderTools = ({ dispatch, toggleVisible }) => (
   <View style={headerTools.container}>
     <TouchableOpacity onPress={toggleVisible}>
-      <View style={headerTools.lineCtx}>
-        <View style={[headerTools.line, rotate45]} />
-        <View style={[headerTools.line, rotate135]} />
-      </View>
+      <Image
+        style={headerTools.linePng}
+        source={xPng}
+        resizeMode='contain'
+      />
     </TouchableOpacity>
     <TouchableOpacity
       onPress={() => dispatch({ type: 'CLEAR' })}
