@@ -1,5 +1,4 @@
 import { StyleSheet } from 'react-native'
-import { SCREEN_WIDTH, SCREEN_HEIGHT } from './styles/variables'
 
 const style = StyleSheet.create({
   content: {},

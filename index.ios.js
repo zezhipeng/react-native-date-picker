@@ -2,16 +2,14 @@ import React from 'react'
 import { AppRegistry } from 'react-native'
 import { setObservableConfig } from 'recompose'
 import rxjsConfig from 'recompose/rxjsObservableConfig'
-import moment from 'moment'
 
 import App from './src'
 
-moment.locale('zh-cn')
 
 setObservableConfig(rxjsConfig)
 
 const datePicker = () => (
-  <App />
+  <App initValue={['2017-03', '2017-08']} />
 )
 
-AppRegistry.registerComponent('datePicker', () => datePicker)
+AppRegistry.registerComponent('datepicker', () => datePicker)

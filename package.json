@@ -1,5 +1,5 @@
 {
-	"name": "date-picker",
+	"name": "datepicker",
 	"version": "0.0.1",
 	"private": false,
 	"scripts": {
@@ -8,18 +8,23 @@
 	},
 	"main": "./src/component/drawer_layout",
 	"dependencies": {
+		"callbag-basics": "^3.0.0",
+		"callbag-to-obs": "^1.0.0",
 		"chinese-lunar": "^0.1.4",
+		"create-subscription": "^16.3.2",
 		"moment": "^2.20.1",
 		"moment-range": "^3.1.1",
 		"prop-types": "^15.6.0",
 		"ramda": "^0.25.0",
-		"react": "16.0.0-alpha.12",
-		"react-native": "0.47.1",
+		"react": "16.3.1",
+		"react-native": "0.55.3",
 		"react-native-root-modal": "^3.0.0",
 		"react-native-section-list-get-item-layout": "^2.2.2",
+		"react-propify-methods": "^1.1.0",
 		"react-redux": "^5.0.6",
 		"recompose": "^0.26.0",
 		"redux": "^3.7.2",
+		"rx-react-container": "^0.5.0",
 		"rxjs": "^5.5.7"
 	},
 	"devDependencies": {

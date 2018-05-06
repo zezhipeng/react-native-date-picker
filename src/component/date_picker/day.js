@@ -5,6 +5,7 @@ import { withProps, compose, pure, branch, renderComponent } from 'recompose'
 import { connect } from 'react-redux'
 import moment from 'moment'
 import { DAY_CONAINER_WIDTH, animatedStyle, dayStyle as style } from './style'
+import { Consumer } from '../../context'
 
 const today = moment()
 
@@ -14,20 +15,20 @@ class Day extends PureComponent {
     active: new Animated.Value(0)
   }
 
-  componentWillReceiveProps(nextProps) {
-    const { type } = nextProps
-    const { isActive } = this.state
+  // componentWillReceiveProps(nextProps) {
+  //   const { type } = nextProps
+  //   const { isActive } = this.state
 
-    if (type && !isActive) {
-      return this._toggleActive(() => this._toggleAnimated(1))
-    }
+  //   if (type && !isActive) {
+  //     return this._toggleActive(() => this._toggleAnimated(1))
+  //   }
 
-    if (!type && isActive) {
-      return this._toggleActive(() => this._toggleAnimated(0))
-    }
+  //   if (!type && isActive) {
+  //     return this._toggleActive(() => this._toggleAnimated(0))
+  //   }
 
-    return null
-  }
+  //   return null
+  // }
 
   _toggleActive = (cb = () => {}) => {
     const { isActive } = this.state
@@ -50,13 +51,14 @@ class Day extends PureComponent {
       lunarDay,
       offsetStyle,
       setRange,
-      type
+      type,
+      onSelect
     } = this.props
     const animatedObj = animatedStyle(type, this.state.active)
 
     return (
       <TouchableWithoutFeedback
-        onPress={setRange}
+        onPress={onSelect}
       >
         <Animated.View style={[style.dayContainer, offsetStyle, animatedObj.ctx]}>
           <Animated.Text style={[style.dayText, animatedObj.text]}>
@@ -86,14 +88,29 @@ const Tomorrow = ({
   </View>
 )
 
+const WithContextDay = props => (
+  <Consumer>
+    {(ctx) => {
+      console.log('========Consumer===============')
+      console.log(ctx)
+      console.log('====================================')
+      return (
+        <Day
+          {...props}
+        />
+      )
+    }}
+  </Consumer>
+)
+
 const setProps = withProps(({
   index,
   full,
   dispatch,
   weekdays
 }) => ({
-  offsetStyle: index === 0 ? { marginLeft: DAY_CONAINER_WIDTH * weekdays } : {},
-  setRange: () => dispatch({ type: 'SET_RANGE', data: full })
+  offsetStyle: index === 0 ? { marginLeft: DAY_CONAINER_WIDTH * weekdays } : {}
+  // setRange: () => dispatch({ type: 'SET_RANGE', data: full })
 }))
 
 const renderWhileIsTomorrow = branch(
@@ -102,10 +119,10 @@ const renderWhileIsTomorrow = branch(
 )
 
 const EnhanceDay = compose(
-  connect(),
+  // connect(),
   setProps,
   renderWhileIsTomorrow,
   pure
-)(Day)
+)(WithContextDay)
 
 export default (item, index) => <EnhanceDay key={index} index={index} {...item} />
